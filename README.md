@@ -1,71 +1,108 @@
 # RSA Cryptography
 
-## Mathematics Behind Secure Communication
+> **Mathematics Behind Secure Communication**
 
-RSA Cryptography is an educational web-based project developed to demonstrate how **mathematics and number theory are used in modern cryptography and secure communication**.
+An educational web-based project that demonstrates how **mathematics and number theory power modern cryptography and secure communication**.
 
-The project explains the working principles of the **RSA encryption algorithm**, including prime numbers, modular arithmetic, public and private keys, encryption, and decryption. It also introduces the **Hill Cipher** to demonstrate another mathematical approach to cryptography.
+The project explores the mathematical foundations of **RSA encryption**, including prime numbers, modular arithmetic, Euler's Totient Function, public and private keys, key generation, encryption, and decryption. It also introduces the **Hill Cipher** to demonstrate how matrix mathematics can be applied to cryptography.
 
-The project was developed and presented as part of a **National Mathematics Day University-Level Model Presentation/Exhibition**, where it received **3rd Prize**.
+🏆 **3rd Prize — National Mathematics Day University-Level Model Presentation/Exhibition**
 
----
-
-# Problem Statement
-
-In the digital world, sensitive information such as passwords, messages, financial information, and personal data needs to be protected from unauthorized access.
-
-Cryptography provides mathematical techniques for securing information, but many students encounter cryptography as a complex theoretical topic.
-
-The project aims to make the mathematical concepts behind cryptography easier to understand through an **interactive and visual learning platform**.
+🌐 **Live Demo:** https://the-nidhi-bhat.github.io/cryptography-rsa/
 
 ---
 
-# Our Solution
+## Overview
 
-The RSA Cryptography project demonstrates how mathematical concepts can be transformed into a practical security mechanism.
+Cryptography is built on mathematical principles that allow information to be protected from unauthorized access.
 
-The project explains:
+However, concepts such as modular arithmetic, prime numbers, Euler's Totient Function, and modular inverses can initially feel abstract.
+
+This project turns those concepts into an **interactive educational web experience**, connecting mathematical theory with practical cryptographic operations.
+
+### The project demonstrates
 
 * Prime numbers
 * Number theory
 * Modular arithmetic
 * Greatest Common Divisor (GCD)
 * Euler's Totient Function
+* Modular inverse
 * Public and private keys
 * RSA key generation
-* Encryption
-* Decryption
+* RSA encryption
+* RSA decryption
 * Hill Cipher fundamentals
-
-The project connects these mathematical concepts to their role in **secure digital communication**.
 
 ---
 
-# What is RSA?
+## Problem Statement
 
-RSA is a **public-key cryptographic algorithm** that uses two different keys:
+Sensitive information such as messages, passwords, financial information, and personal data needs protection during digital communication.
+
+Cryptography provides mathematical techniques for securing such information, but learning cryptography only through formulas can make the underlying ideas difficult to visualize.
+
+The goal of this project is to make the **mathematics behind cryptography easier to understand through an interactive web-based learning experience**.
+
+---
+
+## Solution
+
+The project connects mathematical concepts to the stages of a cryptographic system.
+
+```mermaid
+flowchart TD
+    A[Mathematical Foundations] --> B[Number Theory]
+    A --> C[Modular Arithmetic]
+    A --> D[Prime Numbers]
+
+    B --> E[RSA]
+    C --> E
+    D --> E
+
+    E --> F[Key Generation]
+    F --> G[Public Key]
+    F --> H[Private Key]
+
+    G --> I[Encryption]
+    H --> J[Decryption]
+
+    I --> K[Ciphertext]
+    K --> J
+    J --> L[Original Message]
+
+    A --> M[Hill Cipher]
+    M --> N[Matrix Operations]
+    N --> O[Modular Arithmetic]
+```
+
+---
+
+# RSA Cryptography
+
+## What is RSA?
+
+RSA is a **public-key cryptographic algorithm** based on mathematical properties of large composite numbers and modular arithmetic.
+
+Unlike symmetric encryption, RSA uses two related keys:
 
 ```text
 Public Key
-    ↓
-Used for Encryption
+    │
+    └── Used for Encryption
 
 Private Key
-    ↓
-Used for Decryption
+    │
+    └── Used for Decryption
 ```
 
-The two keys are mathematically related but serve different purposes.
-
-RSA derives its security from mathematical properties related to the difficulty of factoring large composite numbers.
+The public key can be shared, while the private key is intended to remain secret.
 
 ---
 
-# Mathematical Foundation
+## Mathematical Foundation
 
-RSA relies heavily on concepts from number theory.
-
-## 1. Prime Numbers
+### 1. Prime Numbers
 
 RSA begins with two prime numbers:
 
@@ -74,17 +111,17 @@ p
 q
 ```
 
-These primes are used to calculate:
+These are used to calculate the modulus:
 
 ```text
 n = p × q
 ```
 
-The value `n` becomes part of the public and private key structure.
+The value `n` forms part of both the public and private key.
 
 ---
 
-## 2. Euler's Totient Function
+### 2. Euler's Totient Function
 
 For two distinct prime numbers:
 
@@ -92,13 +129,13 @@ For two distinct prime numbers:
 φ(n) = (p - 1)(q - 1)
 ```
 
-The value of Euler's Totient Function is used during RSA key generation.
+Euler's Totient Function is used during RSA key generation.
 
 ---
 
-## 3. Public Key
+### 3. Public Key
 
-The public key consists of:
+The RSA public key is represented as:
 
 ```text
 (e, n)
@@ -106,22 +143,27 @@ The public key consists of:
 
 where:
 
-* `e` is the public exponent
-* `n` is the product of the two prime numbers
+* `e` = public exponent
+* `n` = modulus
 
-The public key can be shared with others.
+The public key can be distributed to other users.
 
 ---
 
-## 4. Private Key
+### 4. Private Key
 
-The private key consists of:
+The private key is represented as:
 
 ```text
 (d, n)
 ```
 
-where `d` is calculated using the modular inverse of `e` with respect to `φ(n)`.
+where:
+
+* `d` = private exponent
+* `n` = modulus
+
+The private exponent is calculated using the modular inverse of `e` with respect to `φ(n)`.
 
 The private key must remain secret.
 
@@ -129,22 +171,35 @@ The private key must remain secret.
 
 # RSA Key Generation
 
-The basic RSA key-generation process is:
+The basic process is:
+
+```mermaid
+flowchart TD
+    A[Choose two prime numbers] --> B[p and q]
+    B --> C[Calculate n = p × q]
+    C --> D[Calculate φ n]
+    D --> E[Choose public exponent e]
+    E --> F[Calculate modular inverse d]
+    F --> G[Generate RSA Keys]
+
+    G --> H[Public Key: e, n]
+    G --> I[Private Key: d, n]
+```
+
+In simplified form:
 
 ```text
-Choose two prime numbers
-        ↓
-      p, q
-        ↓
+Choose p and q
+      ↓
 Calculate n = p × q
-        ↓
+      ↓
 Calculate φ(n)
-        ↓
-Choose public exponent e
-        ↓
-Calculate private exponent d
-        ↓
-Generate Keys
+      ↓
+Choose e
+      ↓
+Calculate d
+      ↓
+Generate keys
 ```
 
 The resulting keys are:
@@ -159,7 +214,7 @@ Private Key → (d, n)
 
 # RSA Encryption
 
-For a message represented as `m`, RSA encryption is represented by:
+For a message represented by `m`, RSA encryption can be represented as:
 
 ```text
 c = m^e mod n
@@ -167,18 +222,20 @@ c = m^e mod n
 
 where:
 
-* `m` = original message
-* `e` = public exponent
-* `n` = modulus
-* `c` = encrypted message
+| Symbol | Meaning          |
+| ------ | ---------------- |
+| `m`    | Original message |
+| `e`    | Public exponent  |
+| `n`    | Modulus          |
+| `c`    | Ciphertext       |
 
-The resulting value `c` is the ciphertext.
+The result `c` represents the encrypted message.
 
 ---
 
 # RSA Decryption
 
-The encrypted message can be decrypted using the private key:
+The corresponding simplified RSA decryption operation is:
 
 ```text
 m = c^d mod n
@@ -186,30 +243,28 @@ m = c^d mod n
 
 where:
 
-* `c` = ciphertext
-* `d` = private exponent
-* `n` = modulus
-* `m` = original message
+| Symbol | Meaning          |
+| ------ | ---------------- |
+| `c`    | Ciphertext       |
+| `d`    | Private exponent |
+| `n`    | Modulus          |
+| `m`    | Original message |
 
 Conceptually:
 
-```text
-Original Message
-       ↓
-    Encryption
-       ↓
-   Ciphertext
-       ↓
-    Decryption
-       ↓
-Original Message
+```mermaid
+flowchart LR
+    A[Original Message] --> B[Encryption]
+    B --> C[Ciphertext]
+    C --> D[Decryption]
+    D --> E[Original Message]
 ```
 
 ---
 
-# Example
+# Simplified Example
 
-A simplified RSA example can be represented using small prime numbers for educational purposes.
+For educational purposes, RSA can be demonstrated using small prime numbers.
 
 Suppose:
 
@@ -221,294 +276,314 @@ q = 11
 Then:
 
 ```text
-n = 5 × 11
+n = p × q
+  = 5 × 11
   = 55
 ```
 
-Euler's Totient:
+Euler's Totient Function becomes:
 
 ```text
-φ(n) = (5 - 1)(11 - 1)
+φ(n) = (p - 1)(q - 1)
+
+     = (5 - 1)(11 - 1)
+
      = 4 × 10
+
      = 40
 ```
 
-A suitable public exponent can then be selected such that it is relatively prime to `φ(n)`.
+A suitable public exponent `e` can then be selected such that:
 
-The corresponding private exponent is calculated using the modular inverse.
+```text
+gcd(e, φ(n)) = 1
+```
 
-This demonstrates how the mathematical components of RSA are connected.
+The private exponent `d` is calculated as the modular inverse of `e` modulo `φ(n)`.
 
-> Small numbers are used only for demonstration. Real RSA uses very large key sizes and optimized algorithms.
+> **Note:** Small numbers are used only to make the mathematics easy to understand. Real-world RSA uses very large key sizes and carefully designed implementations.
 
 ---
 
 # Hill Cipher
 
-Along with RSA, the project introduces the **Hill Cipher**, another cryptographic technique based on mathematics.
+The project also introduces the **Hill Cipher**, a classical cryptographic technique based on matrix operations and modular arithmetic.
 
-The Hill Cipher uses **matrix operations and modular arithmetic** to transform plaintext into ciphertext.
+The basic process is:
 
-The basic concept is:
-
-```text
-Plaintext
-    ↓
-Convert characters to numbers
-    ↓
-Matrix Multiplication
-    ↓
-Modulo Operation
-    ↓
-Ciphertext
+```mermaid
+flowchart TD
+    A[Plaintext] --> B[Convert Characters to Numbers]
+    B --> C[Create Matrix]
+    C --> D[Matrix Multiplication]
+    D --> E[Modulo Operation]
+    E --> F[Ciphertext]
 ```
 
-This demonstrates how concepts from **linear algebra and modular arithmetic** can be applied to cryptography.
+The Hill Cipher demonstrates how concepts from **linear algebra and modular arithmetic** can be applied to encryption.
 
----
-
-# Key Features
-
-## Interactive Learning
-
-The project presents cryptography concepts in a structured and easy-to-understand format.
-
-## RSA Explanation
-
-Explains the mathematical process behind RSA from key generation to encryption and decryption.
-
-## Mathematical Concepts
-
-Covers:
-
-* Prime numbers
-* Modular arithmetic
-* Number theory
-* Euler's Totient Function
-* Modular inverse
-
-## Public & Private Keys
-
-Demonstrates the difference between public and private keys and their respective roles.
-
-## Encryption & Decryption
-
-Shows how mathematical operations transform plaintext into ciphertext and back.
-
-## Hill Cipher
-
-Introduces matrix-based encryption as another example of mathematical cryptography.
-
----
-
-# Project Architecture
-
-The conceptual flow of the project is:
-
-```text
-                 RSA CRYPTOGRAPHY
-                        |
-          +-------------+-------------+
-          |                           |
-          v                           v
-   Mathematical Concepts       Cryptography Concepts
-          |                           |
-          v                           v
-  Number Theory              Public / Private Keys
-  Prime Numbers                       |
-  Modular Arithmetic                  v
-  Euler's Totient              Encryption
-  Modular Inverse                     |
-                                      v
-                                  Decryption
-```
-
----
-
-# User Flow
-
-The educational flow of the website is:
-
-```text
-Start
-  ↓
-Introduction to Cryptography
-  ↓
-Learn Mathematical Concepts
-  ↓
-Understand RSA
-  ↓
-Key Generation
-  ↓
-Encryption
-  ↓
-Decryption
-  ↓
-Explore Hill Cipher
-  ↓
-Understand Applications
-```
-
----
-
-# Technology
-
-The project is designed as a web-based educational application.
-
-### Frontend
-
-* HTML
-* CSS
-* JavaScript
-
-### Core Concepts
-
-* Number Theory
-* Modular Arithmetic
-* Matrix Mathematics
-* Cryptography
-
-The implementation can be extended using modern web frameworks and cryptographic libraries for more advanced functionality.
-
----
-
-# Applications of RSA
-
-RSA is historically important in public-key cryptography and has been used in areas such as:
-
-* Secure communication
-* Digital signatures
-* Authentication
-* Key exchange systems
-* Digital certificates
-* Secure data transmission
-
-Modern cryptographic systems often combine asymmetric cryptography with other cryptographic techniques rather than using RSA alone for bulk data encryption.
+Unlike RSA, the Hill Cipher is primarily useful today as an educational example of classical cryptography.
 
 ---
 
 # RSA vs Hill Cipher
 
-| Feature            | RSA                                                   | Hill Cipher                                |
-| ------------------ | ----------------------------------------------------- | ------------------------------------------ |
-| Type               | Public-key cryptography                               | Classical symmetric cipher                 |
-| Mathematical basis | Number theory                                         | Matrix mathematics                         |
-| Keys               | Public + Private                                      | Shared key                                 |
-| Main concepts      | Prime numbers, modular arithmetic                     | Matrices, modular arithmetic               |
-| Modern relevance   | Historically important and still used in some systems | Primarily educational/classical            |
-| Purpose in project | Demonstrate modern cryptographic mathematics          | Demonstrate mathematical cipher techniques |
+| Feature                 | RSA                                 | Hill Cipher                                |
+| ----------------------- | ----------------------------------- | ------------------------------------------ |
+| Cryptography type       | Public-key                          | Classical symmetric                        |
+| Mathematical foundation | Number theory                       | Matrix mathematics                         |
+| Keys                    | Public + private                    | Shared key                                 |
+| Main concepts           | Prime numbers, modular arithmetic   | Matrices, modular arithmetic               |
+| Modern role             | Public-key cryptographic algorithm  | Primarily educational                      |
+| Purpose in this project | Demonstrate public-key cryptography | Demonstrate mathematical cipher techniques |
+
+---
+
+# Key Features
+
+### 📐 Mathematical Foundations
+
+Explores the mathematical concepts required to understand RSA.
+
+### 🔑 Public & Private Keys
+
+Explains how RSA uses separate keys for its public-key cryptographic model.
+
+### 🔐 Encryption & Decryption
+
+Demonstrates the mathematical relationship between plaintext, ciphertext, and RSA keys.
+
+### 🧮 RSA Mathematics
+
+Covers:
+
+* Prime numbers
+* GCD
+* Euler's Totient Function
+* Modular arithmetic
+* Modular inverse
+
+### 🔢 Hill Cipher
+
+Introduces matrix-based cryptography and demonstrates the relationship between linear algebra and encryption.
+
+### 🎓 Interactive Learning
+
+The website presents cryptography concepts as a visual learning experience rather than only a collection of mathematical formulas.
+
+---
+
+# Educational Flow
+
+```mermaid
+flowchart TD
+    A[Introduction to Cryptography]
+    --> B[Mathematical Foundations]
+
+    B --> C[Prime Numbers]
+    B --> D[Modular Arithmetic]
+    B --> E[Euler's Totient Function]
+    B --> F[GCD & Modular Inverse]
+
+    C --> G[RSA]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[Key Generation]
+    H --> I[Public Key]
+    H --> J[Private Key]
+
+    I --> K[Encryption]
+    J --> L[Decryption]
+
+    K --> M[Ciphertext]
+    M --> L
+
+    G --> N[Hill Cipher]
+    N --> O[Matrix Mathematics]
+```
+
+---
+
+# Project Architecture
+
+The project is a lightweight static web application.
+
+```mermaid
+flowchart TD
+    A[User] --> B[Web Interface]
+
+    B --> C[index.html]
+    B --> D[index.css]
+    B --> E[index.js]
+
+    C --> E
+    D --> B
+    E --> F[Cryptography Demonstrations]
+
+    F --> G[RSA Concepts]
+    F --> H[Hill Cipher Concepts]
+    F --> I[Mathematical Calculations]
+```
+
+---
+
+# Technology Stack
+
+| Technology       | Purpose                                        |
+| ---------------- | ---------------------------------------------- |
+| **HTML**         | Web page structure                             |
+| **CSS**          | Styling and visual presentation                |
+| **JavaScript**   | Interactivity and cryptographic demonstrations |
+| **GitHub Pages** | Deployment                                     |
+
+### Repository Composition
+
+```text
+JavaScript  40.2%
+HTML        38.5%
+CSS         21.3%
+```
+
+---
+
+# Project Structure
+
+```text
+cryptography-rsa/
+│
+├── .github/
+│   └── workflows/
+│       └── ...
+│
+├── index.html
+├── index.css
+├── index.js
+└── README.md
+```
+
+The repository also includes a **GitHub Actions workflow** for automated GitHub Pages deployment.
+
+---
+
+# Getting Started
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/the-nidhi-bhat/cryptography-rsa.git
+cd cryptography-rsa
+```
+
+## Run Locally
+
+Because the project is a static HTML/CSS/JavaScript application, it can be served using any local development server.
+
+For example:
+
+```bash
+python -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+---
+
+# Deployment
+
+The project is deployed using **GitHub Pages**.
+
+A GitHub Actions workflow automates deployment when changes are pushed to the repository's main branch.
+
+```mermaid
+flowchart LR
+    A[Code Changes] --> B[Push to main]
+    B --> C[GitHub Actions]
+    C --> D[Build / Deploy]
+    D --> E[GitHub Pages]
+    E --> F[Live Website]
+```
+
+### Live Website
+
+**https://the-nidhi-bhat.github.io/cryptography-rsa/**
+
+---
+
+# Applications of RSA
+
+RSA and related public-key cryptographic techniques have been important in areas such as:
+
+* Authentication
+* Digital signatures
+* Digital certificates
+* Secure communication
+* Key management
+* Secure data exchange
+
+Modern secure systems typically combine asymmetric cryptography with other cryptographic techniques rather than using RSA alone for bulk data encryption.
 
 ---
 
 # Educational Objectives
 
-The project was designed to demonstrate:
+The project demonstrates:
 
 1. How mathematics contributes to cybersecurity.
 2. How prime numbers are used in cryptography.
 3. How modular arithmetic enables cryptographic operations.
-4. How public and private keys work.
-5. How encryption and decryption are mathematically connected.
-6. How matrices can be used for classical encryption.
-7. How abstract mathematical concepts can be demonstrated through an interactive application.
-
----
-
-# Project Demonstration
-
-The demonstration follows a simple progression:
-
-```text
-Mathematics
-     ↓
-Number Theory
-     ↓
-RSA Key Generation
-     ↓
-Public Key
-     ↓
-Encryption
-     ↓
-Ciphertext
-     ↓
-Private Key
-     ↓
-Decryption
-     ↓
-Original Message
-```
-
-This allows viewers to understand the connection between **mathematical theory and practical cybersecurity**.
+4. How Euler's Totient Function contributes to RSA key generation.
+5. How public and private keys work.
+6. How encryption and decryption are mathematically related.
+7. How matrix mathematics can be applied to classical cryptography.
+8. How mathematical theory can be transformed into an interactive learning experience.
 
 ---
 
 # Achievement
 
-The project was presented at a **National Mathematics Day University-Level Model Presentation/Exhibition**.
+The project was developed and presented as part of a:
 
-### Achievement
+**National Mathematics Day University-Level Model Presentation/Exhibition**
 
-**3rd Prize – University-Level Model Presentation/Exhibition**
+### Result
 
-The project demonstrated the application of mathematical concepts to cryptography and cybersecurity.
+🏆 **3rd Prize**
 
----
-
-# Project Impact
-
-The main purpose of the project was to make cryptography more understandable by connecting mathematical theory with a practical application.
-
-Instead of treating concepts such as modular arithmetic, prime numbers, and matrices as isolated mathematical topics, the project demonstrates how they can contribute to information security.
+The project demonstrated the connection between **mathematics, cryptography, and cybersecurity** through an interactive web-based model.
 
 ---
 
 # Future Scope
 
-The project can be extended with:
+Possible extensions include:
 
-### Interactive RSA Simulator
-
-Allow users to enter values and observe RSA key generation, encryption, and decryption step by step.
-
-### Visualization
-
-Add visual representations of:
-
-* Key generation
-* Modular arithmetic
-* Encryption
-* Decryption
-
-### Larger Key Demonstration
-
-Demonstrate the difference between educational small-number RSA and real-world RSA key sizes.
-
-### Digital Signature Demonstration
-
-Extend the project to explain how RSA can be used for digital signatures and authentication.
-
-### Additional Classical Ciphers
-
-Add:
-
-* Caesar Cipher
-* Vigenère Cipher
-* Playfair Cipher
-* Affine Cipher
-
-### Cryptography Comparison
-
-Provide an educational comparison between classical and modern cryptographic techniques.
+* [ ] Interactive RSA key-generation simulator
+* [ ] Step-by-step encryption/decryption visualization
+* [ ] Larger-key RSA demonstrations
+* [ ] Digital-signature demonstration
+* [ ] Caesar Cipher
+* [ ] Vigenère Cipher
+* [ ] Playfair Cipher
+* [ ] Affine Cipher
+* [ ] Cryptography algorithm comparison
+* [ ] Interactive mathematical visualizations
+* [ ] Additional cybersecurity concepts
 
 ---
 
-# Important Security Note
+# Security & Educational Disclaimer
 
-This project is primarily an **educational demonstration of cryptography**.
+This project is primarily an **educational demonstration**.
 
-The simplified mathematical examples are intended to explain how RSA works and should **not be used for protecting real confidential information**.
+The simplified RSA examples are intended to explain the underlying mathematics and should **not be used to protect real confidential information**.
 
-Real-world cryptographic systems use carefully designed algorithms, secure implementations, sufficiently large key sizes, secure random number generation, and standardized protocols.
+Real-world cryptographic systems require secure algorithms, appropriate key sizes, secure random-number generation, validated implementations, and standardized protocols.
 
 ---
 
@@ -516,38 +591,56 @@ Real-world cryptographic systems use carefully designed algorithms, secure imple
 
 **Status:** Completed
 
-**Project Type:** Educational Web-Based Cryptography Project
+**Type:** Educational Web Application
 
-**Domain:** Mathematics / Cryptography / Cybersecurity
+**Domain:** Cryptography · Mathematics · Cybersecurity
 
-**Event:** National Mathematics Day
+**Technologies:** HTML · CSS · JavaScript
 
-**Achievement:** 3rd Prize – University-Level Model Presentation/Exhibition
+**Deployment:** GitHub Pages
 
----
-
-# Keywords
-
-`RSA`
-`Cryptography`
-`Cybersecurity`
-`Number Theory`
-`Prime Numbers`
-`Modular Arithmetic`
-`Euler Totient Function`
-`Public Key Cryptography`
-`Encryption`
-`Decryption`
-`Hill Cipher`
-`Mathematics`
-`Information Security`
+**Achievement:** 3rd Prize — National Mathematics Day University-Level Model Presentation/Exhibition
 
 ---
 
-# Conclusion
+# Live Demo
 
-The RSA Cryptography project demonstrates how mathematical principles can be transformed into practical cryptographic techniques.
+🌐 **https://the-nidhi-bhat.github.io/cryptography-rsa/**
 
-By exploring **prime numbers, modular arithmetic, Euler's Totient Function, public and private keys, encryption, decryption, and matrix-based cryptography**, the project provides an accessible introduction to the mathematical foundations of information security.
+---
 
-The project was successfully presented at the **National Mathematics Day University-Level Model Presentation/Exhibition**, where it received **3rd Prize**.
+# Repository
+
+**GitHub:**
+https://github.com/the-nidhi-bhat/cryptography-rsa
+
+---
+
+## Topics
+
+```text
+cryptography
+rsa
+rsa-encryption
+cybersecurity
+number-theory
+modular-arithmetic
+public-key-cryptography
+encryption
+decryption
+hill-cipher
+mathematics
+information-security
+javascript
+html
+css
+github-pages
+```
+
+---
+
+## About
+
+An educational RSA cryptography project demonstrating how **mathematical concepts such as prime numbers, modular arithmetic, Euler's Totient Function, and modular inverses** contribute to encryption and secure communication.
+
+Developed for a **National Mathematics Day University-Level Model Presentation/Exhibition**, where it received **3rd Prize**.
